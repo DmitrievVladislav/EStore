@@ -1,0 +1,26 @@
+version: "3.11"
+
+services:
+  database:
+    ports:
+      - '5432:5432'
+    image: postgres:latest
+    container_name: e_store_postgre_db
+    volumes:
+      - '/postgres_data:/var/lib/postgresql'
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=320110'
+      - 'POSTGRES_DB=EShopTestCase'
+      - 'PGDATA=/var/lib/postgresql/data'
+  app_backend:
+    container_name: app_backend
+    build: .
+    command: bash -c 'pip install -r requirements.txt
+                      && python manage.py makemigrations
+                      && python manage.py migrate
+                      && python manage.py runserver 0.0.0.0:8080'
+    ports:
+      - '8000:8080'
+    depends_on:
+      - database
