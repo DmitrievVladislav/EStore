@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 from .models import Product
 from .serializers import ProductsSerializer
@@ -31,14 +32,19 @@ class ProductsView(APIView):
 
     @swagger_auto_schema(
         operation_summary="Получить список всех товаров",
+        manual_parameters=[
+            openapi.Parameter('min', openapi.IN_QUERY, description="Минимальная цена",
+                              type=openapi.TYPE_INTEGER),
+            openapi.Parameter('max', openapi.IN_QUERY, description="Максимальная цена",
+                              type=openapi.TYPE_INTEGER)],
         responses={
             200: ProductsSerializer(many=True),
             500: "Серверная ошибка"},
     )
     @permission_classes([IsAdminUser])
     def get(self, request):
-        min = request.data.get("min")
-        max = request.data.get("max")
+        min = request.query_params.get("min")
+        max = request.query_params.get("max")
         return Response(self.check_conditions(min, max))
 
     @swagger_auto_schema(

@@ -43,14 +43,18 @@ class CartView(APIView):
         quantity = request.data.get("quantity")
         if quantity <= 0:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        cart = Cart(
-            product=product,
-            quantity=quantity,
-            user=request.user,
-            price=product.price)
-        cart.total = cart.total_sum()
-        cart.save()
-        return Response(status=status.HTTP_201_CREATED)
+        cart = Cart.objects.filter(product=product).first()
+        if not cart:
+            cart = Cart(
+                product=product,
+                quantity=quantity,
+                user=request.user,
+                price=product.price)
+            cart.total = cart.total_sum()
+            cart.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class SingleCartUtils(APIView):
