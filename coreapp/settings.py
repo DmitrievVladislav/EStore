@@ -98,8 +98,8 @@ DATABASES = {
         "NAME": 'EShopTestCase',
         "USER": 'postgres',
         "PASSWORD": '320110',
-        # "HOST":  'localhost',
-        "HOST":  'database',  # <-Docker
+        "HOST":  'localhost',
+        # "HOST":  'database',  # <-Docker
         "PORT": '5432',
     }
 }

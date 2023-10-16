@@ -20,7 +20,7 @@ class CartView(APIView):
             500: "Ошибка сервера"},
     )
     def get(self, request):
-        cart = Cart.objects.filter(user_id=request.user.id).values()
+        cart = Cart.objects.filter(user_id=request.user.id).all()
         if not cart:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = CartSerializer(cart, many=True)
