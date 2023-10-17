@@ -16,7 +16,7 @@ dadata = Dadata(api_key, secret_key)
 
 class OrderView(APIView):
     permission_classes = [IsAuthenticated]
-
+    
     @swagger_auto_schema(
         operation_summary="Получение списка всех заказов юзера",
         responses={

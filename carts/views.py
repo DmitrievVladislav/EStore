@@ -2,7 +2,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 
 from carts.models import Cart
 from carts.serializers import CartSerializer, PostCartSerializer
@@ -43,7 +43,7 @@ class CartView(APIView):
         quantity = request.data.get("quantity")
         if quantity <= 0:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        cart = Cart.objects.filter(product=product).first()
+        cart = Cart.objects.filter(product=product, user=request.user).first()
         if not cart:
             cart = Cart(
                 product=product,
@@ -119,24 +119,3 @@ class SingleCartUtils(APIView):
         serializer = CartSerializer(cart)
         return Response(serializer.data)
 
-    # @swagger_auto_schema(
-    #     operation_summary="Изменение товара из корзине",
-    #     request_body=PostCartSerializer,
-    #     responses={
-    #         201: PostCartSerializer,
-    #         204: "Данные удалены",
-    #         404: "Не найдено",
-    #         500: "Ошибка сервера",
-    #     },
-    # )
-    # def post(self, request, cart_id):
-    #     cart = self.get_cart_object(cart_id, request.user.id)
-    #     if not cart:
-    #         return Response(status=status.HTTP_404_NOT_FOUND)
-    #     cart.quantity = request.data.get("quantity")
-    #     if cart.quantity <= 0:
-    #         cart.delete()
-    #         return Response(status=status.HTTP_204_NO_CONTENT)
-    #     cart.total = cart.total_sum()
-    #     cart.save()
-    #     return Response(status=status.HTTP_201_CREATED)

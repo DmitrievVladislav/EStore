@@ -13,7 +13,7 @@ from .serializers import ProductsSerializer
 class ProductsView(APIView):
 
     def get_sorted_by_price_products(self, min, max):
-        products = Product.objects.filter(price__range=(min, max)).order_by('price').values()
+        products = Product.objects.filter(price__range=(min, max)).order_by('price').all()
         serialized_products = ProductsSerializer(products, many=True)
         return serialized_products.data
 
@@ -43,9 +43,9 @@ class ProductsView(APIView):
     )
     @permission_classes([IsAdminUser])
     def get(self, request):
-        min = request.query_params.get("min")
-        max = request.query_params.get("max")
-        return Response(self.check_conditions(min, max))
+        min_value = request.query_params.get("min")
+        max_value = request.query_params.get("max")
+        return Response(self.check_conditions(min_value, max_value))
 
     @swagger_auto_schema(
         operation_summary="Добавить товар",
@@ -63,6 +63,7 @@ class ProductsView(APIView):
             serialized_product.save()
             return Response(status=status.HTTP_201_CREATED)
         return Response(serialized_product.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class ProductUtils(APIView):
 
