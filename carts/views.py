@@ -73,7 +73,6 @@ class SingleCartUtils(APIView):
             404: "Не найдено",
             500: "Ошибка сервера",
         },
-
     )
     def put(self, request, cart_id):
         cart = self.get_cart_object(cart_id, request.user.id)

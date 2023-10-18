@@ -2,6 +2,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from products.models import Product
 
 from products.serializers import ProductsSerializer
 from .models import Category
@@ -92,3 +93,4 @@ class SingleCategoryDetails(APIView):
 #     products_in_category = get_category_object(id).related_products
 #     serializer = ProductsSerializer(products_in_category, many=True)
 #     return Response(serializer.data)
+ #products = Category.objects.filter(related_products__in=[1, 8]).dispose() #Тестовый запрос на получение категорий выбранных товаров

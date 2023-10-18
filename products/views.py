@@ -6,8 +6,8 @@ from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
-from .models import Product
-from .serializers import ProductsSerializer
+from .models import Product, RecentlyViewed
+from .serializers import ProductsSerializer, RecentlyViewedSerializer
 
 
 class ProductsView(APIView):
@@ -75,8 +75,16 @@ class ProductUtils(APIView):
     )
     @permission_classes(AllowAny)
     def get(self, request, id):
-        products = Product.objects.filter(id=id).first()
-        serializer = ProductsSerializer(products)
+        product = Product.objects.filter(id=id).first()
+        try:
+            viewed = RecentlyViewed.objects.get(user_id=request.user.id, product_id=product.id)
+        except RecentlyViewed.DoesNotExist:
+            viewed = RecentlyViewed(
+                user=request.user,
+                product=product
+            )
+        viewed.save()
+        serializer = ProductsSerializer(product)
         return Response(serializer.data)
 
     @swagger_auto_schema(
@@ -109,6 +117,22 @@ class ProductUtils(APIView):
         product = Product.objects.filter(id=id).first()
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class RecommendedProductsView(APIView):
+
+    @swagger_auto_schema(
+        operation_summary="Получить последние просмотренные товары",
+        responses={
+            200: ProductsSerializer(many=True),
+            404: "Не найдено",
+            500: "Ошибка сервера"},
+    )
+    def get(self, request):
+        products = Product.objects.filter(recentlyviewed__user_id=request.user.id).order_by('-recentlyviewed__viewed_at')
+        serializer = ProductsSerializer(products, many=True)
+        return Response(serializer.data)
+
+
 
 # @api_view(['GET'])
 # def get_product(request, id):

@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 
 class Product(models.Model):
     title = models.CharField(max_length=255, null=False, blank=False)
@@ -14,3 +16,10 @@ class Product(models.Model):
         verbose_name_plural = 'products'
         ordering = ('-created',)
 
+class RecentlyViewed(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    viewed_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-viewed_at',)
