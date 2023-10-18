@@ -5,7 +5,7 @@ from products.models import Product
 
 
 class Category(MPTTModel):
-    title = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     picture = models.TextField(default=None, null=True)
     background_color = models.CharField(max_length=255, default=None, null=True)
