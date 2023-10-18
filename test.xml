@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+    <categories>
+      <category id="3927">Мужчинам</category>
+      <category id="3934" parentId="3927" picture="https://static.street-beat.ru/upload/uf/485/48553cc709f6dab1a151c5cbe1b8b69b.jpg" backgroundColor="#FFFFFF" textColor="#000000">Обувь</category>
+      <category id="3950" parentId="3934" picture="https://static.street-beat.ru/upload/uf/d97/d977c2f70ae787fd4b4a2e2f1f15e0bd.png" backgroundColor="#FFFFFF" textColor="#000000">Кроссовки</category>
+      <category id="3951" parentId="3934" picture="https://static.street-beat.ru/upload/uf/5c9/5c902b5489597dea605495234eb164ef.png" backgroundColor="#FFFFFF" textColor="#000000">Кеды</category>
+      <category id="3952" parentId="3934" picture="https://static.street-beat.ru/upload/uf/832/8329d544209e5638a8e86dfcece01d85.png" backgroundColor="#FFFFFF" textColor="#000000">Ботинки</category>
+      <category id="3953" parentId="3934" picture="https://static.street-beat.ru/upload/uf/5d7/5d70692cf84fcfb04041451c4e0975d9.png" backgroundColor="#FFFFFF" textColor="#000000">Сланцы </category>
+      <category id="3968" parentId="3934" picture="https://static.street-beat.ru/upload/uf/c66/c662e6265a4708a4186721ae1ff78e38.png" backgroundColor="#FFFFFF" textColor="#000000">Вся обувь</category>
+      <category id="7000" parentId="3934" picture="https://static.street-beat.ru/upload/uf/8b8/8b856423a3a51e6ea8800ccbde4c93f9.jpg" backgroundColor="#FFFFFF" textColor="#000000">adidas Forum</category>
+      <category id="7002" parentId="3934" picture="https://static.street-beat.ru/upload/uf/bf8/bf840b825a851fdf394b6c2ac80243a8.jpg" backgroundColor="#FFFFFF" textColor="#000000">Converse Chuck 70</category>
+      <category id="7004" parentId="3934" picture="https://static.street-beat.ru/upload/uf/a36/a364138e4ade63e9bbac4e603c9e46dc.jpg" backgroundColor="#FFFFFF" textColor="#000000">PUMA Mirage Sport</category>
+      <category id="7006" parentId="3934" picture="https://static.street-beat.ru/upload/uf/ee2/ee2150fd37fecb102f01111217543e5a.jpg" backgroundColor="#FFFFFF" textColor="#000000">Reebok Classic Leather</category>
+      <category id="3935" parentId="3927" picture="https://static.street-beat.ru/upload/uf/e9b/e9b2ff2bb1a0aedae4a7c02b40ece13e.jpg" backgroundColor="#FFFFFF" textColor="#000000">Одежда</category>
+      <category id="3954" parentId="3935" picture="https://static.street-beat.ru/upload/uf/12e/12e98af099fc8a8ba97f3036c48f7ca1.png" backgroundColor="#FFFFFF" textColor="#000000">Толстовки</category>
+      <category id="3957" parentId="3935" picture="https://static.street-beat.ru/upload/uf/28d/28d904416954f5efb88bf30ce1223903.png" backgroundColor="#FFFFFF" textColor="#000000">Брюки</category>
+      <category id="3956" parentId="3935" picture="https://static.street-beat.ru/upload/uf/aa8/aa82201f665ed53b28383daab34633de.png" backgroundColor="#FFFFFF" textColor="#000000">Футболки и майки</category>
+      <category id="3959" parentId="3935" picture="https://static.street-beat.ru/upload/uf/109/1097dc068f5fc9b36ae813857e2b4a61.png" backgroundColor="#FFFFFF" textColor="#000000">Шорты</category>
+      <category id="3955" parentId="3935" picture="https://static.street-beat.ru/upload/uf/4da/4daa1a8b6f4189fbe7b20afbc501d8e2.png" backgroundColor="#FFFFFF" textColor="#000000">Куртки</category>
+      <category id="5115" parentId="3935" picture="https://static.street-beat.ru/upload/uf/48a/48a534daf0f283c917381d5e92129be5.png" backgroundColor="#FFFFFF" textColor="#000000">Вся одежда</category>
+      <category id="3936" parentId="3927" picture="https://static.street-beat.ru/upload/uf/394/3940627e0ba89f3037666d9f0fb1ea95.jpg" backgroundColor="#FFFFFF" textColor="#000000">Аксессуары</category>
+      <category id="3961" parentId="3936" backgroundColor="#FFFFFF" textColor="#000000">Рюкзаки и сумки</category>
+      <category id="4089" parentId="3936" backgroundColor="#FFFFFF" textColor="#000000">Поясные сумки</category>
+      <category id="3965" parentId="3936" backgroundColor="#FFFFFF" textColor="#000000">Кепки</category>
+      <category id="6467" parentId="3936" backgroundColor="#FFFFFF" textColor="#000000">Панамы</category>
+      <category id="3966" parentId="3936" backgroundColor="#FFFFFF" textColor="#000000">Перчатки и шарфы</category>
+      <category id="3960" parentId="3936" backgroundColor="#FFFFFF" textColor="#000000">Носки</category>
+      <category id="5711" parentId="3936" backgroundColor="#FFFFFF" textColor="#000000">Шапки</category>
+      <category id="3963" parentId="3936" backgroundColor="#FFFFFF" textColor="#000000">Мячи</category>
+      <category id="3964" parentId="3936" backgroundColor="#FFFFFF" textColor="#000000">Уход за обувью</category>
+      <category id="3967" parentId="3936" backgroundColor="#FFFFFF" textColor="#000000">Все аксессуары </category>
+      <category id="4052" parentId="3927" picture="https://static.street-beat.ru/upload/uf/689/689c546ff8dbc9c55e9fde465022d08f.jpg" backgroundColor="#FFFFFF" textColor="#000000">Бренды</category>
+      <category id="5151" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Все бренды</category>
+      <category id="4056" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">adidas Originals </category>
+      <category id="4091" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">PUMA</category>
+      <category id="4053" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Nike</category>
+      <category id="4054" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Jordan</category>
+      <category id="4060" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Vans</category>
+      <category id="4061" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Tommy Jeans</category>
+      <category id="4116" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">The North Face</category>
+      <category id="4057" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Reebok Classic</category>
+      <category id="4055" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">New Balance</category>
+      <category id="4059" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Converse</category>
+      <category id="5588" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Eastpak</category>
+      <category id="4058" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Asics</category>
+      <category id="6378" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Levis</category>
+      <category id="5622" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Champion</category>
+      <category id="6214" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Saucony</category>
+      <category id="6192" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Dr. Martens</category>
+      <category id="5292" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Timberland</category>
+      <category id="5623" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Herschel</category>
+      <category id="6839" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Alpha Industries</category>
+      <category id="5392" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Helly Hansen</category>
+      <category id="5625" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">47BRAND</category>
+      <category id="5624" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">New Era</category>
+      <category id="5626" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Crep Project</category>
+      <category id="5627" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Solemate</category>
+      <category id="5628" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">Tarrago</category>
+      <category id="6838" parentId="4052" backgroundColor="#FFFFFF" textColor="#000000">UGG</category>
+      <category id="3928">Женщинам</category>
+      <category id="3939" parentId="3928" picture="https://static.street-beat.ru/upload/uf/944/9447e5e404e9171ac72e99308915e530.jpg" backgroundColor="#FFFFFF" textColor="#000000">Обувь</category>
+      <category id="3970" parentId="3939" picture="https://static.street-beat.ru/upload/uf/b8c/b8c92fd5cc840930fa1bb4afb2357f0b.png" backgroundColor="#FFFFFF" textColor="#000000">Кроссовки</category>
+      <category id="3971" parentId="3939" picture="https://static.street-beat.ru/upload/uf/6e2/6e261cc06b54d94c2a761b5033e9bf7b.png" backgroundColor="#FFFFFF" textColor="#000000">Кеды</category>
+      <category id="3972" parentId="3939" picture="https://static.street-beat.ru/upload/uf/272/2727aefed65492f89cd117d7ea7cd845.png" backgroundColor="#FFFFFF" textColor="#000000">Ботинки</category>
+      <category id="3973" parentId="3939" picture="https://static.street-beat.ru/upload/uf/3c6/3c6b144990f8baaad73091d11b607d78.png" backgroundColor="#FFFFFF" textColor="#000000">Сланцы</category>
+      <category id="3974" parentId="3939" picture="https://static.street-beat.ru/upload/uf/44a/44abd47c63fc1fc9a35a0bce2788ce42.png" backgroundColor="#FFFFFF" textColor="#000000">Вся обувь</category>
+      <category id="7008" parentId="3939" picture="https://static.street-beat.ru/upload/uf/599/599ebbd0ee682594908b641d640577ef.jpg" backgroundColor="#FFFFFF" textColor="#000000">adidas Forum</category>
+      <category id="7010" parentId="3939" picture="https://static.street-beat.ru/upload/uf/32a/32abcbfc02b0877f8182fa24b4917707.jpg" backgroundColor="#FFFFFF" textColor="#000000">Nike Blazer</category>
+      <category id="7012" parentId="3939" picture="https://static.street-beat.ru/upload/uf/e62/e62f2b5a2105d19e2e525542174cf2de.jpg" backgroundColor="#FFFFFF" textColor="#000000">PUMA Cali Dream</category>
+      <category id="7014" parentId="3939" picture="https://static.street-beat.ru/upload/uf/30f/30f8cb786466a2016ffd5e42c9b15d04.jpg" backgroundColor="#FFFFFF" textColor="#000000">Reebok Classic Leather</category>
+      <category id="3940" parentId="3928" picture="https://static.street-beat.ru/upload/uf/dff/dff127049d3e367eb16782f42abf0e0b.jpg" backgroundColor="#FFFFFF" textColor="#000000">Одежда</category>
+      <category id="3975" parentId="3940" picture="https://static.street-beat.ru/upload/uf/711/7110be841763459a200ede017b2fc8ea.png" backgroundColor="#FFFFFF" textColor="#000000">Толстовки</category>
+      <category id="3979" parentId="3940" picture="https://static.street-beat.ru/upload/uf/c32/c3216d897fa6f9e05bbf4187453a8dc5.png" backgroundColor="#FFFFFF" textColor="#000000">Брюки</category>
+      <category id="3977" parentId="3940" picture="https://static.street-beat.ru/upload/uf/e8a/e8acde4ff9579a10260e1f7580ab5c17.png" backgroundColor="#FFFFFF" textColor="#000000">Футболки и майки</category>
+      <category id="3981" parentId="3940" picture="https://static.street-beat.ru/upload/uf/0ef/0ef912a5b9d1dd77440e94d246a78097.png" backgroundColor="#FFFFFF" textColor="#000000">Шорты</category>
+      <category id="3976" parentId="3940" picture="https://static.street-beat.ru/upload/uf/9e8/9e8427b09c4f3756133fbd7f0424ea59.png" backgroundColor="#FFFFFF" textColor="#000000">Куртки</category>
+      <category id="3980" parentId="3940" picture="https://static.street-beat.ru/upload/uf/0bf/0bf5a040d9dd64e4ce86a85b6050ef81.png" backgroundColor="#FFFFFF" textColor="#000000">Леггинсы и тайтсы</category>
+      <category id="3982" parentId="3940" picture="https://static.street-beat.ru/upload/uf/f77/f77dec4891c0ffefb9031677813e9257.png" backgroundColor="#FFFFFF" textColor="#000000">Вся одежда</category>
+      <category id="3941" parentId="3928" picture="https://static.street-beat.ru/upload/uf/5ef/5ef328f4d90b31020c2fe1e22bb2b971.jpg" backgroundColor="#FFFFFF" textColor="#000000">Аксессуары</category>
+      <category id="3984" parentId="3941" picture="https://static.street-beat.ru/upload/uf/c64/c6492543498c4b08d55fa3fe3121559a.png" backgroundColor="#FFFFFF" textColor="#000000">Рюкзаки и сумки</category>
+      <category id="4090" parentId="3941" picture="https://static.street-beat.ru/upload/uf/e41/e41c5f87156baa75b94782358129663b.png" backgroundColor="#FFFFFF" textColor="#000000">Поясные сумки</category>
+      <category id="3988" parentId="3941" picture="https://static.street-beat.ru/upload/uf/ba0/ba0e8f39d6e57f6391314caf9f7bc872.png" backgroundColor="#FFFFFF" textColor="#000000">Кепки</category>
+      <category id="6468" parentId="3941" picture="https://static.street-beat.ru/upload/uf/dbd/dbd8cfdbd3a4ef49b4be3c483eec7e61.png" backgroundColor="#FFFFFF" textColor="#000000">Панамы</category>
+      <category id="3986" parentId="3941" picture="https://static.street-beat.ru/upload/uf/b22/b2231bb4ca6741ef2ee265de53f62a6b.png" backgroundColor="#FFFFFF" textColor="#000000">Мячи</category>
+      <category id="3983" parentId="3941" picture="https://static.street-beat.ru/upload/uf/a5d/a5d4fed73e634d6505cf282b16d65968.png" backgroundColor="#FFFFFF" textColor="#000000">Носки</category>
+      <category id="3987" parentId="3941" picture="https://static.street-beat.ru/upload/uf/1ca/1ca7ec2d06dfc43bff4ff315c84587e5.png" backgroundColor="#FFFFFF" textColor="#000000">Уход за обувью</category>
+      <category id="6120" parentId="3941" picture="https://static.street-beat.ru/upload/uf/214/2145392f6b07f0a3cdb1832a46786e2d.png" backgroundColor="#FFFFFF" textColor="#000000">Шапки</category>
+      <category id="3989" parentId="3941" picture="https://static.street-beat.ru/upload/uf/e4c/e4ccca7deabc8bd401b2e7329441f67c.png" backgroundColor="#FFFFFF" textColor="#000000">Перчатки и шарфы</category>
+      <category id="3990" parentId="3941" picture="https://static.street-beat.ru/upload/uf/dff/dffaf60dee536a6c5e2bfd540697cd13.png" backgroundColor="#FFFFFF" textColor="#000000">Все аксессуары</category>
+      <category id="4063" parentId="3928" picture="https://static.street-beat.ru/upload/uf/890/8906bb92bda0c4c52ad1bf3e3d0e8fff.jpg" backgroundColor="#FFFFFF" textColor="#000000">Бренды</category>
+      <category id="5152" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Все бренды</category>
+      <category id="4067" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">adidas Originals </category>
+      <category id="4092" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">PUMA</category>
+      <category id="4064" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Nike</category>
+      <category id="4065" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Jordan</category>
+      <category id="5296" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">The North Face</category>
+      <category id="4068" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Reebok Classic</category>
+      <category id="4070" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Converse</category>
+      <category id="4066" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">New Balance</category>
+      <category id="4071" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Vans</category>
+      <category id="4072" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Tommy Jeans</category>
+      <category id="4069" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Asics</category>
+      <category id="6379" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Levis</category>
+      <category id="5633" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Champion</category>
+      <category id="6193" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Dr. Martens</category>
+      <category id="5635" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">New Era</category>
+      <category id="5393" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Helly Hansen</category>
+      <category id="5636" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">47BRAND</category>
+      <category id="5589" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Eastpak</category>
+      <category id="5634" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Herschel</category>
+      <category id="5294" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Timberland</category>
+      <category id="6840" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">UGG</category>
+      <category id="6841" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Alpha Industries </category>
+      <category id="5630" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Solemate</category>
+      <category id="5631" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Crep Project</category>
+      <category id="5637" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Tarrago</category>
+      <category id="4100" parentId="4063" backgroundColor="#FFFFFF" textColor="#000000">Fila</category>
+      <category id="3929">Детям</category>
+      <category id="3944" parentId="3929" picture="https://static.street-beat.ru/upload/uf/266/266d5050d5d6b06d0c133b6d30efb281.jpg" backgroundColor="#FFFFFF" textColor="#000000">Обувь</category>
+      <category id="3991" parentId="3944" picture="https://static.street-beat.ru/upload/uf/8bd/8bdb9bc8bb3b2cd87a31e82f1d58031d.png" backgroundColor="#FFFFFF" textColor="#000000">Кроссовки</category>
+      <category id="3992" parentId="3944" picture="https://static.street-beat.ru/upload/uf/abc/abc95473b448db77afd88f66515026b0.png" backgroundColor="#FFFFFF" textColor="#000000">Кеды</category>
+      <category id="3993" parentId="3944" picture="https://static.street-beat.ru/upload/uf/0a1/0a183c2483f9bcf3fd6dfebbdcda5d76.png" backgroundColor="#FFFFFF" textColor="#000000">Ботинки</category>
+      <category id="3994" parentId="3944" picture="https://static.street-beat.ru/upload/uf/8a9/8a9f83c5bfea54fa2db85dea156e258f.png" backgroundColor="#FFFFFF" textColor="#000000">Сланцы</category>
+      <category id="5405" parentId="3944" picture="https://static.street-beat.ru/upload/uf/d28/d288dc1a7b44dc87ec4099987c0853cf.png" backgroundColor="#FFFFFF" textColor="#000000">Вся обувь</category>
+      <category id="3945" parentId="3929" picture="https://static.street-beat.ru/upload/uf/e4a/e4a650906c1052fa63f6248fe7f86ffa.jpg" backgroundColor="#FFFFFF" textColor="#000000">Одежда</category>
+      <category id="3999" parentId="3945" picture="https://static.street-beat.ru/upload/uf/b5b/b5b8b27f803c19f4c894c1e0c2e6fb2d.png" backgroundColor="#FFFFFF" textColor="#000000">Толстовки</category>
+      <category id="4002" parentId="3945" picture="https://static.street-beat.ru/upload/uf/025/02513425991e42852724c033cd6dd0bf.png" backgroundColor="#FFFFFF" textColor="#000000">Брюки</category>
+      <category id="4001" parentId="3945" picture="https://static.street-beat.ru/upload/uf/4da/4da89cadf371ce31a1a6d7e046cc76ef.png" backgroundColor="#FFFFFF" textColor="#000000">Футболки и майки</category>
+      <category id="4003" parentId="3945" picture="https://static.street-beat.ru/upload/uf/6dd/6dd74ca2f88692a1ad062fc7bbd95e60.png" backgroundColor="#FFFFFF" textColor="#000000">Шорты</category>
+      <category id="4000" parentId="3945" picture="https://static.street-beat.ru/upload/uf/2fc/2fc1cc8cf5a8e9bebbfa746dd435a726.png" backgroundColor="#FFFFFF" textColor="#000000">Куртки</category>
+      <category id="4004" parentId="3945" picture="https://static.street-beat.ru/upload/uf/918/918af1fff48dbdc5157e6a693a462af6.png" backgroundColor="#FFFFFF" textColor="#000000">Комбинезоны</category>
+      <category id="4005" parentId="3945" picture="https://static.street-beat.ru/upload/uf/814/814fbcac04d0dd4b89943267e17ea415.png" backgroundColor="#FFFFFF" textColor="#000000">Костюмы</category>
+      <category id="6072" parentId="3945" picture="https://static.street-beat.ru/upload/uf/1b9/1b90f70a0c42f23e04c73c421283dcaf.png" backgroundColor="#FFFFFF" textColor="#000000">Леггинсы и тайтсы</category>
+      <category id="5121" parentId="3945" picture="https://static.street-beat.ru/upload/uf/579/579c2c80d337fa4094b8d990a02d5ebf.png" backgroundColor="#FFFFFF" textColor="#000000">Вся одежда</category>
+      <category id="3946" parentId="3929" picture="https://static.street-beat.ru/upload/uf/28e/28e9133ddf54e9ed3ba8ac8bcebd2edb.jpg" backgroundColor="#FFFFFF" textColor="#000000">Аксессуары</category>
+      <category id="4017" parentId="3946" picture="https://static.street-beat.ru/upload/uf/73c/73c7755481d8b406f10c692e663394df.png" backgroundColor="#FFFFFF" textColor="#000000">Рюкзаки и сумки</category>
+      <category id="4114" parentId="3946" picture="https://static.street-beat.ru/upload/uf/6bb/6bb0932950ba5301fc55b53c59aeb04b.png" backgroundColor="#FFFFFF" textColor="#000000">Поясные сумки </category>
+      <category id="4016" parentId="3946" picture="https://static.street-beat.ru/upload/uf/dce/dce02ce3e406fabe173df2e4051dbcb7.png" backgroundColor="#FFFFFF" textColor="#000000">Носки</category>
+      <category id="4026" parentId="3946" picture="https://static.street-beat.ru/upload/uf/528/5285acd357476cec16075abbca8c8c01.png" backgroundColor="#FFFFFF" textColor="#000000">Мячи</category>
+      <category id="4021" parentId="3946" picture="https://static.street-beat.ru/upload/uf/56e/56e2b88e49c2332e92f63868ff620d2e.png" backgroundColor="#FFFFFF" textColor="#000000">Кепки</category>
+      <category id="6470" parentId="3946" picture="https://static.street-beat.ru/upload/uf/e9b/e9b09ac5519246d57ef8f7532b68daeb.png" backgroundColor="#FFFFFF" textColor="#000000">Панамы</category>
+      <category id="4020" parentId="3946" picture="https://static.street-beat.ru/upload/uf/0ce/0cea02ac9f118f00108d4a4786eafbd0.png" backgroundColor="#FFFFFF" textColor="#000000">Уход за обувью </category>
+      <category id="6159" parentId="3946" picture="https://static.street-beat.ru/upload/uf/60c/60c639cf66e369e16efccd418280fbea.png" backgroundColor="#FFFFFF" textColor="#000000">Шапки</category>
+      <category id="4022" parentId="3946" picture="https://static.street-beat.ru/upload/uf/5da/5daffc11d8df63067e9ca730d0f1398e.png" backgroundColor="#FFFFFF" textColor="#000000">Перчатки и шарфы</category>
+      <category id="5123" parentId="3946" picture="https://static.street-beat.ru/upload/uf/397/3973197e756140099eddb96905316f70.png" backgroundColor="#FFFFFF" textColor="#000000">Все аксессуары</category>
+      <category id="4074" parentId="3929" picture="https://static.street-beat.ru/upload/uf/3d8/3d8aef192a8d4344f63e09f67e0f4176.jpg" backgroundColor="#FFFFFF" textColor="#000000">Бренды</category>
+      <category id="4075" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Nike</category>
+      <category id="4076" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Jordan</category>
+      <category id="4088" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">adidas Originals</category>
+      <category id="4080" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">PUMA</category>
+      <category id="4077" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Converse</category>
+      <category id="6464" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Levis</category>
+      <category id="5639" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Reebok Classic</category>
+      <category id="5641" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">New Balance</category>
+      <category id="4081" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">The North Face</category>
+      <category id="5304" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Eastpak</category>
+      <category id="6147" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Helly Hansen</category>
+      <category id="5341" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Timberland</category>
+      <category id="5303" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Herschel</category>
+      <category id="5396" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Skandia</category>
+      <category id="5394" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Jog Dog</category>
+      <category id="6194" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Viking</category>
+      <category id="5398" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">UGG</category>
+      <category id="6388" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Norveg</category>
+      <category id="5302" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Molo</category>
+      <category id="5647" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">New Era</category>
+      <category id="5650" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Buff</category>
+      <category id="5654" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Crep Protect</category>
+      <category id="5652" parentId="4074" backgroundColor="#FFFFFF" textColor="#000000">Solemate</category>
+    </categories>
