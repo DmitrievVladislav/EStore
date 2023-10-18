@@ -46,7 +46,7 @@ class CartView(APIView):
         cart = Cart.objects.filter(product=product, user=request.user).first()
         if not cart:
             cart = Cart(
-                product=product,
+                product_id=product.id,
                 quantity=quantity,
                 user=request.user,
                 price=product.price)

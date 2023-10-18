@@ -128,7 +128,7 @@ class RecommendedProductsView(APIView):
             500: "Ошибка сервера"},
     )
     def get(self, request):
-        products = Product.objects.filter(recentlyviewed__user_id=request.user.id).order_by('-recentlyviewed__viewed_at')
+        products = Product.objects.filter(recentlyviewed__user_id=request.user.id).order_by('-recentlyviewed__viewed_at')[1:6]
         serializer = ProductsSerializer(products, many=True)
         return Response(serializer.data)
 
