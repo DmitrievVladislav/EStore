@@ -34,7 +34,7 @@ class XMLParser:
     def get_offer_dicts_list(self):
         root = self.get_data_from_xml()
         offers = []
-        for offer_elem in root.findall('.//offer'):
+        for offer_elem in root.findall('.//offerss'):
             offer = {}
             offer_id = offer_elem.get('id')
             offer['id'] = offer_id
