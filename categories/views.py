@@ -38,6 +38,7 @@ class ProductsCategoryView(APIView):
         serialized_categories = ProductsSerializer(category_products, many=True)
         return Response(serialized_categories.data)
 
+
 class SingleCategoryDetails(APIView):
     permission_classes = [AllowAny]
 
