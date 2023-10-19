@@ -7,9 +7,11 @@ import xml.etree.ElementTree as ET
 
 from categories.models import Category
 from categories.serializers import CategorySerializer
+from .models import Offer
 
 
-class XMLParser():
+class XMLParser:
+
 
     def get_data_from_xml(self):
         tree = ET.parse('C:\\Users\\Inform\\PycharmProjects\\coreapp\\test.xml')
@@ -28,6 +30,45 @@ class XMLParser():
             category['text_color'] = category_elem.get('textColor', None)
             categories.append(category)
         return categories
+
+    def get_offer_dicts_list(self):
+        root = self.get_data_from_xml()
+        offers = []
+        for offer_elem in root.findall('.//offer'):
+            offer = {}
+            offer_id = offer_elem.get('id')
+            offer['id'] = offer_id
+            offer['available'] = offer_elem.get('available')
+            offer['bid'] = offer_elem.get('bid')
+            offer['cbid'] = offer_elem.get('cbid')
+            offer['size_grid_image'] = offer_elem.get('sizeGridImage', None)
+            offer['added_on'] = offer_elem.get('addedOn')
+            for element_name in ['price', 'old_price', 'vendor', 'vendorCode']:
+                element = offer_elem.find(element_name)
+                if element is not None:
+                    if element.tag == 'param':
+                        param_name = element.get('name')
+                        param_unit = element.get('unit')
+                        if param_name == "Размер" and param_unit == "RU":
+                            offer['size'] = element.text
+                    else:
+                        offer[element_name] = element.text
+                else:
+                    offer[element_name] = None
+            offers.append(offer)
+        return offers
+
+    def create_offer(self, offer_dict):
+        offer = Offer(
+            id=offer_dict['id'],
+            available=bool(offer_dict['available']),
+            bid=offer_dict['bid'],
+            cbid=offer_dict['cbid'],
+            size_grid_image=offer_dict['size_grid_image'],
+            added_on=offer_dict['added_on']
+        )
+        offer.save()
+
     def create_category(self, parent_category, category_dict):
         category = Category(
             title=category_dict['title'],
@@ -58,6 +99,16 @@ class XMLParser():
             else:
                 self.create_category(parent_category, category_dict)
 
+    def add_xml_offers_in_db(self):
+        offers = self.get_offer_dicts_list()
+        for offer_dict in offers:
+            offer = Offer.objects.filter(id=offer_dict['id']).first()
+            print(offer)
+            if offer:
+                self.update_category()
+            else:
+                self.create_offer(offer_dict)
+
 
 class OfferView(APIView):
     permission_classes = [IsAuthenticated]
@@ -69,8 +120,7 @@ class OfferView(APIView):
             500: "Серверная ошибка"},
     )
     def get(self, request):
-        parent_category = Category.objects.filter(id=None).first()
         xmlp = XMLParser()
         xmlp.add_xml_categories_in_db()
+        xmlp.add_xml_offers_in_db()
         return Response(status=status.HTTP_200_OK)
-

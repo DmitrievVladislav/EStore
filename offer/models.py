@@ -11,12 +11,12 @@ class Offer(models.Model):
     cbid = models.IntegerField()
     size_grid_image = models.TextField(default=None, null=True)
     added_on = models.DateTimeField()
-    price = models.DecimalField(max_digits=20, decimal_places=2)
-    old_price = models.DecimalField(max_digits=20, decimal_places=2, default=None)
-    vendor = models.CharField(max_length=255)
-    vendorCode = models.CharField(max_length=100)
-    size = models.DecimalField(max_digits=4, decimal_places=2)
+    # price = models.DecimalField(max_digits=20, decimal_places=2)
+    # old_price = models.DecimalField(max_digits=20, decimal_places=2, default=None)
+    # vendor = models.CharField(max_length=255)
+    # vendorCode = models.CharField(max_length=100)
+    # size = models.DecimalField(max_digits=4, decimal_places=2)
 
     class Meta:
-        verbose_name_plural = 'orders'
+        verbose_name_plural = 'offer'
         ordering = ('id',)
