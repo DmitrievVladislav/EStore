@@ -18,3 +18,7 @@ class Cart(models.Model):
     class Meta:
         verbose_name_plural = 'carts'
         ordering = ('-created',)
+
+class Promocode(models.Model):
+    promocode = models.CharField(max_length=255)
+    discount = models.IntegerField()
