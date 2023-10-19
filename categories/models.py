@@ -17,5 +17,5 @@ class Category(MPTTModel):
 
     class MPTTMeta:
         verbose_name_plural = 'categories'
-        order_insertion_by = ['title']
+        order_insertion_by = ['id']
 # Create your models here.
