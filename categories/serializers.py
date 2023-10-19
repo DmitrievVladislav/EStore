@@ -9,5 +9,8 @@ class CategorySerializer(ModelSerializer):
         fields = [
             'id',
             'title',
-            'parent',
+            'parent_id',
+            'picture',
+            'background_color',
+            'text_color'
         ]
