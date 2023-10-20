@@ -18,5 +18,5 @@ class Offer(models.Model):
     size = models.CharField(max_length=100, null=True)
 
     class Meta:
-        verbose_name_plural = 'offerss'
+        verbose_name_plural = 'offers'
         ordering = ('id',)
