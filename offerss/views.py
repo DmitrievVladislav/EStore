@@ -12,7 +12,6 @@ from .models import Offer
 
 class XMLParser:
 
-
     def get_data_from_xml(self):
         tree = ET.parse('C:\\Users\\Inform\\PycharmProjects\\coreapp\\test.xml')
         return tree.getroot()
@@ -34,7 +33,7 @@ class XMLParser:
     def get_offer_dicts_list(self):
         root = self.get_data_from_xml()
         offers = []
-        for offer_elem in root.findall('.//offerss'):
+        for offer_elem in root.findall('.//offer'):
             offer = {}
             offer_id = offer_elem.get('id')
             offer['id'] = offer_id
@@ -43,29 +42,35 @@ class XMLParser:
             offer['cbid'] = offer_elem.get('cbid')
             offer['size_grid_image'] = offer_elem.get('sizeGridImage', None)
             offer['added_on'] = offer_elem.get('addedOn')
-            for element_name in ['price', 'old_price', 'vendor', 'vendorCode']:
+            for element_name in ['group_id', 'price', 'old_price', 'vendor', 'vendorCode', 'modelVendorCode', 'model',
+                                 'typePrefix']:
                 element = offer_elem.find(element_name)
                 if element is not None:
-                    if element.tag == 'param':
-                        param_name = element.get('name')
-                        param_unit = element.get('unit')
-                        if param_name == "Размер" and param_unit == "RU":
-                            offer['size'] = element.text
-                    else:
-                        offer[element_name] = element.text
+                    offer[element_name] = element.text
                 else:
                     offer[element_name] = None
+            for param_elem in offer_elem.findall('param'):
+                param_name = param_elem.get('name')
+                param_unit = param_elem.get('unit')
+                if param_name == "Размер" and param_unit == "RU":
+                    offer['size'] = param_elem.text
             offers.append(offer)
         return offers
 
     def create_offer(self, offer_dict):
         offer = Offer(
             id=offer_dict['id'],
+            product_id=offer_dict['group_id'],
             available=bool(offer_dict['available']),
             bid=offer_dict['bid'],
             cbid=offer_dict['cbid'],
             size_grid_image=offer_dict['size_grid_image'],
-            added_on=offer_dict['added_on']
+            added_on=offer_dict['added_on'],
+            price=offer_dict['price'],
+            old_price=offer_dict['old_price'],
+            vendor=offer_dict['vendor'],
+            vendor_code=offer_dict['vendorCode'],
+            size=offer_dict['size']
         )
         offer.save()
 
@@ -89,6 +94,19 @@ class XMLParser:
         category.text_color = category_dict['text_color']
         category.save()
 
+    def update_offer(self, offer, offer_dict):
+        offer.available = bool(offer_dict['available'])
+        offer.bid = offer_dict['bid']
+        offer.cbid = offer_dict['cbid']
+        offer.size_grid_image = offer_dict['size_grid_image']
+        offer.added_on = offer_dict['added_on']
+        offer.price = offer_dict['price']
+        offer.old_price = offer_dict['old_price']
+        offer.vendor = offer_dict['vendor']
+        offer.vendor_code = offer_dict['vendorCode']
+        offer.size = offer_dict['size']
+        offer.save()
+
     def add_xml_categories_in_db(self):
         categories = self.get_category_dicts_list()
         for category_dict in categories:
@@ -103,9 +121,8 @@ class XMLParser:
         offers = self.get_offer_dicts_list()
         for offer_dict in offers:
             offer = Offer.objects.filter(id=offer_dict['id']).first()
-            print(offer)
             if offer:
-                self.update_category()
+                self.update_offer(offer, offer_dict)
             else:
                 self.create_offer(offer_dict)
 
