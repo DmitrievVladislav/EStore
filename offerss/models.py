@@ -10,12 +10,12 @@ class Offer(models.Model):
     bid = models.IntegerField()
     cbid = models.IntegerField()
     size_grid_image = models.TextField(default=None, null=True)
-    added_on = models.DateTimeField()
+    added_on = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(max_digits=20, decimal_places=2)
-    old_price = models.DecimalField(max_digits=20, decimal_places=2, default=None)
-    vendor = models.CharField(max_length=255)
-    vendorCode = models.CharField(max_length=100)
-    size = models.DecimalField(max_digits=4, decimal_places=2)
+    old_price = models.DecimalField(max_digits=20, decimal_places=2, default=None, null=True)
+    vendor = models.CharField(max_length=255, null=True)
+    vendor_code = models.CharField(max_length=100, null=True)
+    size = models.CharField(max_length=100, null=True)
 
     class Meta:
         verbose_name_plural = 'offerss'
