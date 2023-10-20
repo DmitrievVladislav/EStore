@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'carts',
     'users',
     'orders',
-    'offerss'
+    'offerss',
+    'xml_parser'
 ]
 
 MIDDLEWARE = [
