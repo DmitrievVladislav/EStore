@@ -1,13 +1,23 @@
 from django.db import models
 
 from users.models import User
+from categories.models import Category
 
 
 class Product(models.Model):
     title = models.CharField(max_length=255, null=False, blank=False)
-    description = models.CharField(max_length=510)
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    default_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    default_old_price = models.DecimalField(max_digits=10, decimal_places=2, default=None, null=True, blank=True)
+    barcode = models.CharField(max_length=255, null=True, blank=False, default=None)
+    discount = models.IntegerField(default=None, null=True, blank=True)
+    default_available = models.BooleanField(default=False)
+    description = models.TextField(default=None, null=True)
+    purchasable = models.BooleanField(default=True)
+    preorder = models.BooleanField(default=False)
+    url = models.TextField(default=None, null=True)
+    categories = models.ManyToManyField(Category)
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -15,6 +25,7 @@ class Product(models.Model):
     class Meta:
         verbose_name_plural = 'products'
         ordering = ('-created',)
+
 
 class RecentlyViewed(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
