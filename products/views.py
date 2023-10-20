@@ -13,7 +13,7 @@ from .serializers import ProductsSerializer, RecentlyViewedSerializer
 class ProductsView(APIView):
 
     def get_sorted_by_price_products(self, min, max):
-        products = Product.objects.filter(price__range=(min, max)).order_by('price').all()
+        products = Product.objects.filter(default_price__range=(min, max)).order_by('default_price').all()
         serialized_products = ProductsSerializer(products, many=True)
         return serialized_products.data
 

@@ -49,7 +49,7 @@ class CartView(APIView):
                 product_id=product.id,
                 quantity=quantity,
                 user=request.user,
-                price=product.price)
+                price=product.default_price)
             cart.total = cart.total_sum()
             cart.save()
             return Response(status=status.HTTP_201_CREATED)
