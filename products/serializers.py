@@ -6,7 +6,7 @@ from .models import Product, RecentlyViewed
 class ProductsSerializer(ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'title', 'description', 'price']
+        fields = ['id', 'title', 'description', 'default_price']
 
 class RecentlyViewedSerializer(ModelSerializer):
     class Meta:
