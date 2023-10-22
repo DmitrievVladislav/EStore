@@ -5,7 +5,7 @@ from users.models import User
 
 
 class Offer(models.Model):
-    product_id = models.IntegerField()
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     available = models.BooleanField(default=False)
     bid = models.IntegerField()
     cbid = models.IntegerField()
