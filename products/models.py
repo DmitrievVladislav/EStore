@@ -34,3 +34,26 @@ class RecentlyViewed(models.Model):
 
     class Meta:
         ordering = ('-viewed_at',)
+
+
+class ProductParameter(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='parameters')
+    name = models.CharField(max_length=255)
+    value = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+
+# class Parameter(models.Model):
+#     name = models.CharField(max_length=255)
+#
+#     def __str__(self):
+#         return self.name
+#
+# class ProductParameter(models.Model):
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     parameter = models.ForeignKey(Parameter, on_delete=models.CASCADE)
+#     value = models.CharField(max_length=255)
+
