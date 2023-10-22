@@ -34,7 +34,7 @@ class ProductsCategoryView(APIView):
             500: "Серверная ошибка"}
     )
     def get(self, request, category_id):
-        category_products = Category.objects.filter(id=category_id).first().related_products
+        category_products = Product.objects.filter(categories=category_id)
         serialized_categories = ProductsSerializer(category_products, many=True)
         return Response(serialized_categories.data)
 
