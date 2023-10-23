@@ -38,9 +38,9 @@ class OrderView(APIView):
     def fill_order(self, order, carts):
         for cart in carts:
             order.total_quantity += cart.quantity
-            order.total_sum += cart.total
             order.offers.add(cart.offer)
-            order.save()
+            order.total_sum = cart.all_user_carts_total
+        order.save()
         return
 
     @swagger_auto_schema(
