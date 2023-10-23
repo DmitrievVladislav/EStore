@@ -37,7 +37,7 @@ class ProductsCategoryView(APIView):
             500: "Серверная ошибка"}
     )
     def get(self, request, category_id):
-        category_products = Product.objects.filter(categories=category_id).prefetch_related('categories')
+        category_products = Product.objects.prefetch_related('categories').filter(categories=category_id)
         if not category_products:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serialized_categories = ProductsSerializer(category_products, many=True)

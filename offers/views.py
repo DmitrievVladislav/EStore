@@ -18,7 +18,7 @@ class OfferView(APIView):
             500: "Серверная ошибка"},
     )
     def get(self, request):
-        offers = Offer.objects.all()
+        offers = Offer.objects.select_related('product').all()
         if not offers:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = OfferSerializer(offers, many=True)
@@ -35,7 +35,7 @@ class ProductOfferView(APIView):
             500: "Серверная ошибка"},
     )
     def get(self, request, product_id):
-        offers = Offer.objects.filter(product=product_id)
+        offers = Offer.objects.select_related('product').filter(product=product_id)
         if not offers:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = OfferSerializer(offers, many=True)

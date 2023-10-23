@@ -33,7 +33,8 @@ class ProductsView(APIView):
             min_value = 0
         if max_value is None:
             max_value = 999999
-        products = Product.objects.filter(default_price__range=(min_value, max_value)).order_by('default_price')
+        products = Product.objects.prefetch_related('categories').filter(
+            default_price__range=(min_value, max_value)).order_by('default_price')
         if not products:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = ProductsSerializer(products, many=True)

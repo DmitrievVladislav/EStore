@@ -23,7 +23,7 @@ class CartView(APIView):
             500: "Ошибка сервера"},
     )
     def get(self, request):
-        carts = Cart.objects.filter(user_id=request.user.id)
+        carts = Cart.objects.select_related('offer', 'user').filter(user_id=request.user.id)
         if not carts:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = CartSerializer(carts, many=True)
@@ -48,7 +48,7 @@ class CartView(APIView):
         offer = get_object_or_404(Offer, id=offer_id)  # Проверка на доступность + извлечение цены
         if not (offer.available or offer.purchasable):
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        cart = Cart.objects.filter(offer_id=offer_id, user_id=request.user.id).first()
+        cart = Cart.objects.select_related('offer', 'user').filter(offer_id=offer_id, user_id=request.user.id).first()
         if not cart:
             cart = Cart(
                 offer_id=offer.id,
@@ -138,7 +138,7 @@ class CartCalculationView(APIView):
         bonus = request.data.get("bonus")
         promocode = Promocode.objects.filter(promocode=input_promocode).first()
         max_delivery_cost = 0
-        carts = Cart.objects.filter(user_id=request.user.id)
+        carts = Cart.objects.select_related('offer', 'user').filter(user_id=request.user.id)
         if not carts:
             return Response(status=status.HTTP_404_NOT_FOUND)
         if not promocode:

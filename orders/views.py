@@ -25,7 +25,7 @@ class OrderView(APIView):
             500: "Серверная ошибка"},
     )
     def get(self, request):
-        orders = Order.objects.filter(user_id=request.user.id)
+        orders = Order.objects.prefetch_related('offers').filter(user_id=request.user.id)
         if not orders:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = OrderSerializer(orders, many=True)
@@ -54,7 +54,7 @@ class OrderView(APIView):
     )
     @csrf_exempt
     def post(self, request):
-        carts = Cart.objects.filter(user_id=request.user.id)
+        carts = Cart.objects.select_related('offer', 'user').filter(user_id=request.user.id)
         if not carts:
             return Response(status=status.HTTP_404_NOT_FOUND)
         order = Order(user_id=request.user.id)
