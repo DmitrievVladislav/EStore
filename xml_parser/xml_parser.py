@@ -27,7 +27,7 @@ class XMLParser:
                 'background_color': category_elem.get('backgroundColor'),
                 'text_color': category_elem.get('textColor')
             }
-            categories.append(category)
+            categories.append(Category(**category))
         return categories
 
     def get_offer_dicts_list(self):
@@ -218,13 +218,17 @@ class XMLParser:
 
     def add_xml_products_in_db(self):
         products = self.get_product_dicts_list()
-
+        products_update = []
+        products_create = []
+        products_id = {product.id: product for product in Product.objects.all()}
         for product_dict in products:
-            product = Product.objects.filter(id=product_dict['group_id']).first()
-            if product:
-                self.update_product(product, product_dict)
+            if product_dict['group_id'] in products_id:
+                products_update.append(product_dict)
+            if product_dict:
+                self.update_product(product_dict, product_dict)
             else:
                 self.create_product(product_dict)
+                Product.objects.bulk_create(products)
 
     def add_xml_in_db(self):
         self.add_xml_categories_in_db()
