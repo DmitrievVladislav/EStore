@@ -22,20 +22,5 @@ class UsersView(APIView):
         serializer = UsersSerializer(users, many=True)
         return Response(serializer.data)
 
-    @swagger_auto_schema(
-        operation_summary="Добавить пользователя",
-        request_body=UsersSerializer,
-        responses={
-            201: UsersSerializer,
-            400: "Неправильный ввод данных",
-            500: "Серверная ошибка",
-        },
-    )
-    def post(self, request):
-        serializer = UsersSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
