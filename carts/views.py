@@ -120,6 +120,7 @@ class SingleCartView(APIView):
 
 class CartCalculationView(APIView):
     permission_classes = [IsAuthenticated]
+
     @swagger_auto_schema(
         operation_summary="Пересчитать стоимость корзины с учетом скидок",
         request_body=PostCartCalcSerializer,
@@ -142,6 +143,8 @@ class CartCalculationView(APIView):
         for cart in carts:
             if not cart.is_discounted:
                 temp_discount = cart.offer.discount + promocode.discount
+                if temp_discount >= 99:
+                    temp_discount = 99
                 cart.old_total = cart.total
                 cart.total = ((100 - float(temp_discount)) / 100) * float(cart.total)
                 cart.is_discounted = True
