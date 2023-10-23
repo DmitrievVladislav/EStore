@@ -12,7 +12,7 @@ class Product(models.Model):
     discount = models.IntegerField(default=None, null=True, blank=True)
     default_available = models.BooleanField(default=False)
     description = models.TextField(default=None, null=True)
-    purchasable = models.BooleanField(default=True)
+    default_purchasable = models.BooleanField(default=True)
     preorder = models.BooleanField(default=False)
     url = models.TextField(default=None, null=True)
     categories = models.ManyToManyField(Category)
@@ -45,7 +45,7 @@ class ProductParameter(models.Model):
         return self.name
 
 
-
+# Другой вариант параметров
 # class Parameter(models.Model):
 #     name = models.CharField(max_length=255)
 #

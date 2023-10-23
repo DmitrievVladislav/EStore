@@ -30,7 +30,7 @@ class TestCart(TestCase):
         request = factory.post('/carts/', {
             'product': self.product.id,
             'quantity': 2},
-            format='json')
+                               format='json')
         force_authenticate(request, self.admin)
         cart_view = CartView.as_view()
         response = cart_view(request)

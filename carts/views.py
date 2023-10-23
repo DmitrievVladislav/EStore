@@ -1,10 +1,10 @@
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
-from django.shortcuts import get_object_or_404
 
 from carts.models import Cart
 from carts.serializers import CartSerializer
@@ -47,12 +47,12 @@ class CartView(APIView):
         offer = get_object_or_404(Offer, id=offer_id)  # Проверка на доступность + извлечение цены
         if not offer.available:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        cart = Cart.objects.filter(offer_id=offer_id, user=request.user).first()
+        cart = Cart.objects.filter(offer_id=offer_id, user_id=request.user.id).first()
         if not cart:
             cart = Cart(
                 offer_id=offer.id,
                 quantity=quantity,
-                user=request.user,
+                user_id=request.user.id,
                 price=offer.price,
                 total=offer.price * quantity
             )
