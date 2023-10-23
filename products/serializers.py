@@ -1,11 +1,9 @@
 from rest_framework.serializers import ModelSerializer
 
-from categories.serializers import ShortCategorySerializer
 from .models import Product, RecentlyViewed
 
 
 class ProductsSerializer(ModelSerializer):
-    categories = ShortCategorySerializer(many=True)
 
     class Meta:
         model = Product
