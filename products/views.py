@@ -33,6 +33,8 @@ class ProductsView(APIView):
         if max_value is None:
             max_value = 999999
         products = Product.objects.filter(default_price__range=(min_value, max_value)).order_by('default_price')
+        if not products:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = ProductsSerializer(products, many=True)
         return Response(serializer.data)
 
@@ -55,7 +57,7 @@ class ProductsView(APIView):
         return Response(serialized_product.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ProductUtils(APIView):
+class SingleProductView(APIView):
     @swagger_auto_schema(
         operation_summary="Получить выбранный товар",
         responses={

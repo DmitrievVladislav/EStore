@@ -1,4 +1,5 @@
 from dadata import Dadata
+from django.views.decorators.csrf import csrf_exempt
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -51,6 +52,7 @@ class OrderView(APIView):
             500: "Серверная ошибка",
         },
     )
+    @csrf_exempt
     def post(self, request):
         carts = Cart.objects.filter(user_id=request.user.id)
         if not carts:
