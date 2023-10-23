@@ -17,6 +17,7 @@ class Offer(models.Model):
     vendor = models.CharField(max_length=255, null=True)
     vendor_code = models.CharField(max_length=100, null=True)
     size = models.CharField(max_length=100, null=True)
+    discount = models.IntegerField(default=0)
     delivery = models.BooleanField(default=False)
     delivery_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     delivery_days = models.IntegerField(default=0)

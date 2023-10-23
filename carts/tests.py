@@ -2,7 +2,7 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient, APIRequestFactory, force_authenticate
 
-from .views import SingleCartUtils, CartView
+from .views import SingleCartView, CartView
 from .models import Cart
 from products.models import Product
 from users.models import User

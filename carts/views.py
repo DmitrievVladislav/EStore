@@ -2,12 +2,12 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from carts.models import Cart
-from carts.serializers import CartSerializer
+from carts.models import Cart, Promocode
+from carts.serializers import CartSerializer, PromocodeSerializer, PostCartCalcSerializer
 from offers.models import Offer
 
 
@@ -22,10 +22,10 @@ class CartView(APIView):
             500: "Ошибка сервера"},
     )
     def get(self, request):
-        cart = Cart.objects.filter(user_id=request.user.id)
-        if not cart:
+        carts = Cart.objects.filter(user_id=request.user.id)
+        if not carts:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = CartSerializer(cart, many=True)
+        serializer = CartSerializer(carts, many=True)
         return Response(serializer.data)
 
     @swagger_auto_schema(
@@ -45,7 +45,7 @@ class CartView(APIView):
         if quantity <= 0:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         offer = get_object_or_404(Offer, id=offer_id)  # Проверка на доступность + извлечение цены
-        if not offer.available:
+        if not (offer.available or offer.purchasable):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         cart = Cart.objects.filter(offer_id=offer_id, user_id=request.user.id).first()
         if not cart:
@@ -62,7 +62,7 @@ class CartView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class SingleCartUtils(APIView):
+class SingleCartView(APIView):
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
@@ -76,6 +76,7 @@ class SingleCartUtils(APIView):
             500: "Ошибка сервера",
         },
     )
+    @csrf_exempt
     def put(self, request, cart_id):
         quantity = request.data.get("quantity")
         cart = get_object_or_404(Cart, id=cart_id, user_id=request.user.id)
@@ -84,6 +85,8 @@ class SingleCartUtils(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         cart.quantity = quantity
         cart.total = cart.price * quantity
+        cart.is_discounted = False
+        cart.old_total = 0
         cart.save()
         return Response(status=status.HTTP_202_ACCEPTED)
 
@@ -112,4 +115,83 @@ class SingleCartUtils(APIView):
     def get(self, request, cart_id):
         cart = get_object_or_404(Cart, id=cart_id, user_id=request.user.id)
         serializer = CartSerializer(cart)
+        return Response(serializer.data)
+
+
+class CartCalculationView(APIView):
+    permission_classes = [IsAuthenticated]
+    @swagger_auto_schema(
+        operation_summary="Пересчитать стоимость корзины с учетом скидок",
+        request_body=PostCartCalcSerializer,
+        responses={
+            201: CartSerializer,
+            400: "Неверные данные",
+            404: "Не найдено",
+            500: "Ошибка сервера",
+        },
+    )
+    @csrf_exempt
+    def post(self, request):
+        input_promocode = request.data.get("promocode")
+        promocode = Promocode.objects.filter(promocode=input_promocode).first()
+        carts = Cart.objects.filter(user_id=request.user.id)
+        if not carts:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        if not promocode:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        for cart in carts:
+            if not cart.is_discounted:
+                temp_discount = cart.offer.discount + promocode.discount
+                cart.old_total = cart.total
+                cart.total = ((100 - float(temp_discount)) / 100) * float(cart.total)
+                cart.is_discounted = True
+                cart.save()
+                # if request.data.get('is_delivery') and cart.offer.delivery:
+                #     cart.total += cart.offer.delivery_cost
+        serializer = CartSerializer(carts, many=True)
+        return Response(serializer.data)
+
+
+class PromocodesView(APIView):
+    permission_classes = [IsAdminUser]
+
+    @swagger_auto_schema(
+        operation_summary="Добавить промокод",
+        request_body=PromocodeSerializer,
+        responses={
+            201: PromocodeSerializer,
+            400: "Неверные данные",
+            404: "Не найдено",
+            500: "Ошибка сервера",
+        },
+    )
+    @csrf_exempt
+    def post(self, request):
+        input_prom = request.data.get("promocode")
+        discount = request.data.get("discount")
+        if discount <= 0:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        promocode = Promocode.objects.filter(promocode=input_prom).first()
+        if not promocode:
+            promocode = Promocode(
+                promocode=input_prom,
+                discount=discount
+            )
+            promocode.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    @swagger_auto_schema(
+        operation_summary="Получить список промокодов",
+        responses={
+            200: PromocodeSerializer(many=True),
+            404: "Не найдено",
+            500: "Ошибка сервера"},
+    )
+    def get(self, request):
+        promocodes = Promocode.objects.all()
+        if not promocodes:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = PromocodeSerializer(promocodes, many=True)
         return Response(serializer.data)
