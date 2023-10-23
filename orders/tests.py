@@ -27,7 +27,7 @@ class TestOrder(TestCase):
     def test_order_create(self):
         factory = APIRequestFactory()
         request = factory.post('/orders/', {
-                               'address': 'test'},
+            'address': 'test'},
                                format='json')
         force_authenticate(request, self.admin)
         order_view = OrderView.as_view()
