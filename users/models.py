@@ -8,10 +8,7 @@ class User(AbstractUser):
     def __str__(self):
         return (f"id: {self.id}, username: {self.username}, FIO: {self.first_name} {self.last_name}, superuser: {self.is_superuser}")
 
-    def save(self, *args, **kwargs):
-        if not self.pk:  # Проверяем, создаем ли нового пользователя
-            self.set_password(self.password)  # Хешируем пароль
-        super().save(*args, **kwargs)
+
 
 
 # Create your models here.

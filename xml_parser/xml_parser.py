@@ -17,28 +17,33 @@ class XMLParser:
     def get_category_dicts_list(self):
         root = self.get_data_from_xml()
         categories = []
+
         for category_elem in root.findall('.//category'):
-            category = dict()
-            category['id'] = category_elem.get('id')
-            category['title'] = category_elem.text
-            category['parent_id'] = category_elem.get('parentId')
-            category['picture'] = category_elem.get('picture')
-            category['background_color'] = category_elem.get('backgroundColor')
-            category['text_color'] = category_elem.get('textColor')
+            category = {
+                'id': category_elem.get('id'),
+                'title': category_elem.text,
+                'parent_id': category_elem.get('parentId'),
+                'picture': category_elem.get('picture'),
+                'background_color': category_elem.get('backgroundColor'),
+                'text_color': category_elem.get('textColor')
+            }
             categories.append(category)
         return categories
 
     def get_offer_dicts_list(self):
         root = self.get_data_from_xml()
         offers = []
+
         for offer_elem in root.findall('.//offer'):
-            offer = {}
-            offer['id'] = offer_elem.get('id')
-            offer['available'] = offer_elem.get('available')
-            offer['bid'] = offer_elem.get('bid')
-            offer['cbid'] = offer_elem.get('cbid')
-            offer['size_grid_image'] = offer_elem.get('sizeGridImage')
-            offer['added_on'] = offer_elem.get('addedOn')
+            offer = {
+                'id': offer_elem.get('id'),
+                'available': offer_elem.get('available'),
+                'bid': offer_elem.get('bid'),
+                'cbid': offer_elem.get('cbid'),
+                'size_grid_image': offer_elem.get('sizeGridImage'),
+                'added_on': offer_elem.get('addedOn'),
+            }
+
             for element_name in ['group_id', 'price', 'old_price', 'vendor', 'vendorCode', 'modelVendorCode', 'model',
                                  'typePrefix', 'purchasable', 'delivery', 'useBonuses']:
                 element = offer_elem.find(element_name)
@@ -60,23 +65,25 @@ class XMLParser:
         root = self.get_data_from_xml()
         products = []
         for product_elem in root.findall('.//offer'):
-            product = {}
-            product['available'] = product_elem.get('available')
-            product['categoryIds'] = [category.text for category in product_elem.findall('categoryId')]
-            params = {}
-            for element_name in ['group_id', 'price', 'old_price', 'barcode', 'discount', 'description', 'purchasable',
-                                 'preorder', 'url', 'model']:
+            product = {
+                'available': product_elem.get('available'),
+                'categoryIds': [category.text for category in product_elem.findall('categoryId')],
+                'params': {}
+            }
+
+            for element_name in [
+                'group_id', 'price', 'old_price', 'barcode', 'discount', 'description',
+                'purchasable', 'preorder', 'url', 'model'
+            ]:
                 element = product_elem.find(element_name)
-                if element is not None:
-                    product[element_name] = element.text
-                else:
-                    product[element_name] = None
+                product[element_name] = element.text if element is not None else None
+
             for param_elem in product_elem.findall('param'):
                 name = param_elem.get('name')
                 value = param_elem.text
                 if name != 'Размер':
-                    params[name] = value
-            product['params'] = params
+                    product['params'][name] = value
+
             products.append(product)
         return products
 
@@ -108,10 +115,12 @@ class XMLParser:
             url=product_dict['url']
         )
         product.save()
+
         try:
             product.categories.set(product_dict['categoryIds'])
         except:
             pass
+
         if not ProductParameter.objects.filter(product_id=product.id).exists():
             for name, value in product_dict['params'].items():
                 self.create_parameter(name, value, product_dict['group_id'])
@@ -133,28 +142,17 @@ class XMLParser:
             delivery=bool(offer_dict['delivery']),
             use_bonuses=bool(offer_dict['useBonuses']),
             delivery_days=offer_dict['days'],
-            delivery_cost=offer_dict['cost'],
+            delivery_cost=offer_dict['cost']
         )
         offer.save()
 
-    def create_category(self, parent_category, category_dict):
-        category = Category(
-            title=category_dict['title'],
-            id=category_dict['id'],
-            parent=parent_category,
-            picture=category_dict['picture'],
-            background_color=category_dict['background_color'],
-            text_color=category_dict['text_color']
-        )
+    def create_category(self, category_dict):
+        category = Category(**category_dict)
         category.save()
 
-    def update_category(self, category, parent_category, category_dict):
-        category.title = category_dict['title']
-        category.id = category_dict['id']
-        category.parent = parent_category
-        category.picture = category_dict['picture']
-        category.background_color = category_dict['background_color']
-        category.text_color = category_dict['text_color']
+    def update_category(self, category, category_dict):
+        for key, value in category_dict.items():
+            setattr(category, key, value)
         category.save()
 
     def update_product(self, product, product_dict):
@@ -170,13 +168,15 @@ class XMLParser:
         product.preorder = bool(product_dict['preorder'])
         product.url = product_dict['url']
         product.save()
+
         try:
             product.categories.set(product_dict['categoryIds'])
         except:
             pass
-            for name, value in product_dict['params'].items():
-                if ProductParameter.objects.filter(product_id=product.id, name=name).exists():
-                    self.update_parameter(name, value, product_dict['group_id'])
+
+        for name, value in product_dict['params'].items():
+            if ProductParameter.objects.filter(product_id=product.id, name=name).exists():
+                self.update_parameter(name, value, product_dict['group_id'])
 
     def update_offer(self, offer, offer_dict):
         offer.product_id = offer_dict['group_id']
@@ -198,16 +198,17 @@ class XMLParser:
 
     def add_xml_categories_in_db(self):
         categories = self.get_category_dicts_list()
+
         for category_dict in categories:
             category = Category.objects.filter(id=category_dict['id']).first()
-            parent_category = Category.objects.filter(id=category_dict['parent_id']).first()
             if category:
-                self.update_category(category, parent_category, category_dict)
+                self.update_category(category, category_dict)
             else:
-                self.create_category(parent_category, category_dict)
+                self.create_category(category_dict)
 
     def add_xml_offers_in_db(self):
         offers = self.get_offer_dicts_list()
+
         for offer_dict in offers:
             offer = Offer.objects.filter(id=offer_dict['id']).first()
             if offer:
@@ -217,6 +218,7 @@ class XMLParser:
 
     def add_xml_products_in_db(self):
         products = self.get_product_dicts_list()
+
         for product_dict in products:
             product = Product.objects.filter(id=product_dict['group_id']).first()
             if product:
