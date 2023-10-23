@@ -113,8 +113,8 @@ class XMLParser:
         except:
             pass
         if not ProductParameter.objects.filter(product_id=product.id).exists():
-            for param in product_dict['params']:
-                self.create_parameter(param['name'], param['value'], product_dict['group_id'])
+            for name, value in product_dict['params'].items():
+                self.create_parameter(name, value, product_dict['group_id'])
 
     def create_offer(self, offer_dict):
         offer = Offer(
@@ -174,8 +174,9 @@ class XMLParser:
             product.categories.set(product_dict['categoryIds'])
         except:
             pass
-        for name, value in product_dict['params'].items():
-            self.update_parameter(name, value, product_dict['group_id'])
+            for name, value in product_dict['params'].items():
+                if ProductParameter.objects.filter(product_id=product.id, name=name).exists():
+                    self.update_parameter(name, value, product_dict['group_id'])
 
     def update_offer(self, offer, offer_dict):
         offer.product_id = offer_dict['group_id']
