@@ -14,3 +14,8 @@ class CategorySerializer(ModelSerializer):
             'background_color',
             'text_color'
         ]
+
+class ShortCategorySerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'title']
