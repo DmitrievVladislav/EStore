@@ -1,10 +1,10 @@
 from django.test import TestCase
 from rest_framework import status
-from rest_framework.test import APIClient, APIRequestFactory, force_authenticate
+from rest_framework.test import APIRequestFactory, force_authenticate
 
-from .views import ProductsView
-from .models import Product
 from users.models import User
+from .models import Product
+from .views import ProductsView
 
 
 class TestCart(TestCase):
@@ -16,7 +16,6 @@ class TestCart(TestCase):
             description='test_d'
         )
 
-
     def test_get_products(self):
         factory = APIRequestFactory()
         request = factory.get('/carts/')
@@ -24,4 +23,3 @@ class TestCart(TestCase):
         products = ProductsView.as_view()
         response = products(request)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
