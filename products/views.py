@@ -3,7 +3,7 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.decorators import permission_classes
-from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
@@ -117,7 +117,8 @@ class SingleProductView(APIView):
 
 
 class RecommendedProductsView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
+    last_viewed_length = 5
 
     @swagger_auto_schema(
         operation_summary="Получить последние просмотренные товары",
@@ -127,7 +128,17 @@ class RecommendedProductsView(APIView):
             500: "Ошибка сервера"}
     )
     def get(self, request):
+        if not request.user.id:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
         products = Product.objects.filter(recentlyviewed__user_id=request.user.id).order_by(
-            '-recentlyviewed__viewed_at')[1:6]
+            '-recentlyviewed__viewed_at')[1:self.last_viewed_length + 1]
+        if not products:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = ProductsSerializer(products, many=True)
+        last_product = serializer.data[self.last_viewed_length - 1]['id']
+        last_viewed = RecentlyViewed.objects.filter(product_id=last_product, user_id=request.user.id).first().viewed_at
+        viewed_on_del = RecentlyViewed.objects.filter(viewed_at__lt=last_viewed)
+        if viewed_on_del.exists():
+            for v_elem in viewed_on_del:
+                v_elem.delete()
         return Response(serializer.data)
