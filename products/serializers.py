@@ -1,9 +1,16 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import Product, RecentlyViewed
+from .models import Product, RecentlyViewed, ProductParameter
+
+
+class ParamsSerializer(ModelSerializer):
+    class Meta:
+        model = ProductParameter
+        fields = ['name', 'value']
 
 
 class ProductsSerializer(ModelSerializer):
+    parameters = ParamsSerializer(many=True)
 
     class Meta:
         model = Product
