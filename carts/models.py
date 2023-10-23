@@ -11,7 +11,7 @@ class Cart(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     old_total = models.DecimalField(max_digits=10, decimal_places=2, default=0, null=True, blank=True)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    is_discounted = models.BooleanField(default=False)
+    all_user_carts_total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     delivery_days = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

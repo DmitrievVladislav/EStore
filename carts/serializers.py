@@ -6,7 +6,7 @@ from carts.models import Cart, Promocode
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
-        fields = ['id', 'offer', 'user', 'quantity', 'price', 'old_total', 'total']
+        fields = ['id', 'offer', 'user', 'quantity', 'price', 'old_total', 'total', 'all_user_carts_total']
 
 
 class PromocodeSerializer(serializers.ModelSerializer):

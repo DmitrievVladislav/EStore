@@ -1,3 +1,4 @@
+from django.db.models import Sum, Max
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from drf_yasg.utils import swagger_auto_schema
@@ -85,8 +86,8 @@ class SingleCartView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         cart.quantity = quantity
         cart.total = cart.price * quantity
-        cart.is_discounted = False
         cart.old_total = 0
+        cart.all_user_carts_total = 0
         cart.save()
         return Response(status=status.HTTP_202_ACCEPTED)
 
@@ -134,23 +135,31 @@ class CartCalculationView(APIView):
     @csrf_exempt
     def post(self, request):
         input_promocode = request.data.get("promocode")
+        bonus = request.data.get("bonus")
         promocode = Promocode.objects.filter(promocode=input_promocode).first()
+        max_delivery_cost = 0
         carts = Cart.objects.filter(user_id=request.user.id)
         if not carts:
             return Response(status=status.HTTP_404_NOT_FOUND)
         if not promocode:
             return Response(status=status.HTTP_404_NOT_FOUND)
         for cart in carts:
-            if not cart.is_discounted:
-                temp_discount = cart.offer.discount + promocode.discount
-                if temp_discount >= 99:
-                    temp_discount = 99
-                cart.old_total = cart.total
-                cart.total = ((100 - float(temp_discount)) / 100) * float(cart.total)
-                cart.is_discounted = True
-                cart.save()
-                # if request.data.get('is_delivery') and cart.offer.delivery:
-                #     cart.total += cart.offer.delivery_cost
+            if cart.offer.delivery_cost > max_delivery_cost:
+                max_delivery_cost = cart.offer.delivery_cost
+            temp_discount = cart.offer.discount + promocode.discount
+            if temp_discount >= 99:
+                temp_discount = 99
+            cart.old_total = cart.price * cart.quantity
+            cart.total = ((100 - float(temp_discount)) / 100) * float(cart.old_total)
+            cart.save()
+        carts_total = carts.aggregate(total=Sum('total'))
+        for cart in carts:
+            cart.all_user_carts_total = carts_total['total']
+            if request.data.get('is_delivery'):
+                cart.all_user_carts_total += max_delivery_cost
+            if 0 < bonus <= cart.all_user_carts_total:
+                cart.all_user_carts_total -= bonus
+            cart.save()
         serializer = CartSerializer(carts, many=True)
         return Response(serializer.data)
 
