@@ -19,8 +19,6 @@ class OfferView(APIView):
     )
     def get(self, request):
         offers = Offer.objects.all()
-        x = XMLParser()
-        x.add_xml_in_db()
         if not offers:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = OfferSerializer(offers, many=True)

@@ -6,6 +6,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
 
 from .models import Product, RecentlyViewed
 from .serializers import ProductsSerializer
@@ -58,6 +59,17 @@ class ProductsView(APIView):
 
 
 class SingleProductView(APIView):
+
+    def add_viewed_product(self, user, product):
+        try:
+            viewed_products = RecentlyViewed.objects.get(user_id=user.id, product_id=product.id)
+        except RecentlyViewed.DoesNotExist:
+            viewed_products = RecentlyViewed(
+                user=user,
+                product=product
+            )
+        viewed_products.save()
+
     @swagger_auto_schema(
         operation_summary="Получить выбранный товар",
         responses={
@@ -66,15 +78,8 @@ class SingleProductView(APIView):
     )
     @permission_classes(AllowAny)
     def get(self, request, product_id):
-        product = Product.objects.filter(id=product_id).first()
-        try:
-            viewed_products = RecentlyViewed.objects.get(user_id=request.user.id, product_id=product.id)
-        except RecentlyViewed.DoesNotExist:
-            viewed_products = RecentlyViewed(
-                user=request.user,
-                product=product
-            )
-        viewed_products.save()
+        product = get_object_or_404(Product, id=product_id)
+        self.add_viewed_product(request.user, product)
         serializer = ProductsSerializer(product)
         return Response(serializer.data)
 
@@ -89,7 +94,7 @@ class SingleProductView(APIView):
     )
     @permission_classes(IsAdminUser)
     def put(self, request, product_id):
-        product = Product.objects.filter(id=product_id).first()
+        product = get_object_or_404(Product, id=product_id)
         serializer = ProductsSerializer(product, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -104,8 +109,8 @@ class SingleProductView(APIView):
         }
     )
     @permission_classes(IsAdminUser)
-    def delete(self, request, id):
-        product = Product.objects.filter(id=id).first()
+    def delete(self, request, product_id):
+        product = get_object_or_404(Product, id=product_id)
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -118,7 +123,7 @@ class RecommendedProductsView(APIView):
         responses={
             200: ProductsSerializer(many=True),
             404: "Не найдено",
-            500: "Ошибка сервера"},
+            500: "Ошибка сервера"}
     )
     def get(self, request):
         products = Product.objects.filter(recentlyviewed__user_id=request.user.id).order_by(
