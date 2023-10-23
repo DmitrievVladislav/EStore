@@ -1,4 +1,4 @@
-from django.db.models import Sum, Max
+from django.db.models import Sum
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from drf_yasg.utils import swagger_auto_schema
@@ -66,6 +66,14 @@ class CartView(APIView):
 class SingleCartView(APIView):
     permission_classes = [IsAuthenticated]
 
+    def change_total_status(self, user_id, total):
+        carts = Cart.objects.select_related('offer', 'user').filter(user_id=user_id)
+        if not carts:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        for cart in carts:
+            cart.all_user_carts_total = total
+            cart.save()
+
     @swagger_auto_schema(
         operation_summary="Изменение единицы товара в корзине",
         request_body=CartSerializer,
@@ -89,6 +97,7 @@ class SingleCartView(APIView):
         cart.old_total = 0
         cart.all_user_carts_total = 0
         cart.save()
+        # self.change_total_status(request.user.id, cart.all_user_carts_total)
         return Response(status=status.HTTP_202_ACCEPTED)
 
     @swagger_auto_schema(
